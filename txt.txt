@@ -1,0 +1,380 @@
+return (
+      <div ref={containerRef} className="container">
+        <div className="rectangle">
+          <img
+            src={guerreirinho}
+            alt="Imagem Esquerda"
+            className="image image-left"
+            ref={imageRef}
+          />
+          <img
+            src={esqueleto}
+            alt="Imagem Direita"
+            className="image image-right"
+          />
+        </div>
+        <section id="barraDeJogo">
+               <div id="energia">
+               <ExibirEnergia energia={energia} EnergMaxima={EnergMaxima}/> 
+               </div>
+               <div id="botao">
+             {arrayItens.map((item, index) => (
+               <div
+                 key={index}
+                 className={`item ${currentIndex === index ? 'amarelo' : ''} ${
+                   currentIndex !== divPreta && index === divPreta ? 'preto' : ''
+                 }`}
+               ></div>
+             ))}
+           </div>
+             </section>
+             {/*<button id="buttonverificar" onClick={verificarClick} >
+               Bater
+             </button>
+             <button onClick={() => setEnergMaxima(EnergMaxima + 10)}>Aumentar Energia Máxima</button>*/}
+      </div>
+    );
+
+
+
+
+
+
+
+    body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Evita rolagem */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  transition: transform 0.5s ease; /* Suaviza o giro */
+}
+
+.rectangle {
+  background-image: url('./imgs/Coliseu2.png'); /* Define a imagem como fundo */
+  background-size: cover; /* Garante que a imagem cubra todo o espaço */
+  background-position: center; /* Centraliza a imagem */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative; /* Para posicionar as imagens */
+  width: 60vw; /* Padrão para paisagem */
+  height: 50vh;
+  border: solid 1vw #4A4A4A;
+  border-top: 2vh solid  #4A4A4A;
+  border-top-left-radius: 1vw;
+  border-top-right-radius: 1vw;
+}
+
+.image {
+  position: absolute;
+  transition: left 1s ease-in-out; /* Suaviza o movimento */
+  width: 16vw; /* Padrão para paisagem */
+  height: auto; /* Mantém a proporção da imagem */
+}
+
+.image-left {
+  bottom: 5%;
+  left: 10%; /* Posição inicial da imagem esquerda */
+}
+
+.image-left.movendo {
+  left: 55%; /* Posição para onde a imagem se move */
+  bottom: 5%;
+}
+
+.image-right {
+  right: 10%; /* Posição fixa da imagem direita */
+  bottom: 5%;
+}
+
+
+.raio{
+  height: 20vh;
+}
+
+#Array {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  
+}
+.item {
+  width: 7vh;
+  height: 7vh;
+  margin: 0; /* Espaçamento entre as divs */
+  background-color: white;
+  border: none;
+}
+.item:nth-child(even) {
+  background-color: #f5f5f5;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.item:nth-child(odd) {
+  background-color: #ffff; /* Cinza */
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+  /* Estilos para o primeiro item */
+  .item:first-child {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-left:3px solid black ;
+    
+  }
+  /* Estilos para o último item */
+  .item:last-child {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    border-right: 3px solid black;
+  }
+.amarelo {
+  background-color: yellow !important;
+}
+.item.preto {
+  background-color: black !important;
+}
+#barraDeJogo{
+  display: flex;
+  background-color: #4A4A4A;
+  width: 60vw;
+  border: solid 1vw #4A4A4A;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+}
+.botao{
+  height: 15vh;
+}
+
+#Hp, #EsqHp {
+  display: flex;
+  flex-direction: column; /* Alinha os elementos verticalmente */
+  align-items: center; /* Centraliza os elementos horizontalmente */
+  margin-bottom: 1rem; /* Dá espaço entre HP e a imagem */
+}
+
+#HpSpan, #HpEsqSpan {
+  font-size: 1.5rem; /* Tamanho ajustado para o ícone */
+  margin-right: 0.5rem; /* Espaço entre ícone e barra */
+}
+
+.life-bar {
+  display: flex; /* Cria layout horizontal */
+  align-items: center; /* Centraliza a barra e o texto verticalmente */
+  width: 100%;
+  height: 1rem;
+  background-color: #e0e0e0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.inner-bar {
+  height: 100%;
+  background-color: #ff4500; /* Cor da barra de vida */
+  transition: width 0.3s ease-in-out; /* Suaviza alterações no tamanho */
+}
+
+.valorVida {
+  position: absolute; /* Fixa o texto na barra */
+  top: -1.5rem; /* Ajusta a posição acima da barra */
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+
+
+/* Se a altura for maior que a largura */
+@media (orientation: portrait) {
+  .rectangle {
+    margin-top: 1vh;
+    width: 62vh; /* Proporções ajustadas para retrato */
+    height: 40vw;
+  }
+  .image {
+    width: 23vh; /* Ajusta para modo retrato */
+    position: absolute;
+    transition: left 1s ease-in-out; /* Suaviza o movimento */
+    height: auto; /* Mantém a proporção da imagem */
+  }
+  .image-left {
+    left: 0; /* Posição inicial da imagem esquerda */
+  }
+  .image-left.movendo {
+    left: 55%; /* Posição para onde a imagem se move */
+  }
+  .image-right {
+    right: 0; /* Posição fixa da imagem direita */
+  }
+  .item {
+    width: 7vw;
+    height: 7vw;
+    margin: 0; /* Espaçamento entre as divs */
+    background-color: white;
+    border: none;
+  }
+  #barraDeJogo{
+    background-color: #4A4A4A;
+    width: 61vh;
+    border: solid 1vh #4A4A4A;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    display: flex;
+  }
+  .botao{
+    height: 15vw;
+  }
+}
+
+import React, { useEffect, useRef,useState, useMemo } from "react";
+import esqueleto from './imgs/EsqBase.png';
+import guerreirinho from './imgs/BaseGuerreir001.png';
+import "./Jogo.css";
+import ExibirEnergia from './exibirEnergia';
+import ButtomBater from './Imgs/imgBater.png'
+import ButtomDefender from './Imgs/imgDefender.png'
+
+const Jogo =() => {
+    const imageRef = useRef(null);
+    const containerRef = useRef(null);
+  
+    const animateImage = () => {
+      if (imageRef.current) {
+        imageRef.current.classList.add("movendo");
+        setTimeout(() => {
+          imageRef.current.classList.remove("movendo");
+        }, 1000); // Aguarda 1 segundo para voltar
+      }
+    };
+  
+    const adjustOrientation = () => {
+      if (containerRef.current) {
+        if (window.innerHeight > window.innerWidth) {
+          // "Gira" a tela 90 graus
+          containerRef.current.style.transform = "rotate(90deg)";
+        } else {
+          // Restaura o estado original
+          containerRef.current.style.transform = "rotate(0deg)";
+        }
+      }
+    };
+  
+    useEffect(() => {
+      // Verifica a orientação ao carregar e redimensionar a tela
+      adjustOrientation();
+      window.addEventListener("resize", adjustOrientation);
+      return () => {
+        window.removeEventListener("resize", adjustOrientation);
+      };
+    }, []);
+  //
+  //logica temporaria
+    const verificarClick =()=>{animateImage()}
+    const [energia, setEnergia] = useState(0);
+  const [EnergMaxima, setEnergMaxima] = useState(100);
+
+    React.useEffect(() => {
+      const interval = setInterval(() => {
+        setEnergia((prev) => (prev < EnergMaxima ? prev + 1 : prev)); // Incrementa até EnergMaxima
+      }, 100);
+      return () => clearInterval(interval);
+    }, [EnergMaxima]);
+
+//apenas ilustativo, var sem logica por hora
+    const [currentIndex, setCurrentIndex] = useState(4);
+    const arrayItens = useMemo(() => [' ',' ',' ',' ',' ',' ',' ',' ',' '], []);
+    const [divPreta, setDivPreta] = useState(8);
+    const handleKeyPress = (event) => {
+      if (event.key === "h" || event.key === "H") {
+        console.log("Tecla H foi pressionada!");
+        setEnergMaxima((prevEnergMaxima) => prevEnergMaxima + 10);
+      }
+    };
+  
+    useEffect(() => {
+      // Adiciona o listener quando o componente monta
+      window.addEventListener("keydown", handleKeyPress);
+  
+      // Remove o listener quando o componente desmonta
+      return () => {
+        window.removeEventListener("keydown", handleKeyPress);
+      };
+    }, []);
+    const vida =100
+    const vidaMaxima =100
+    const monstroHp =100
+    const vidaMonstroInicial = 100
+    const larguraVida = vida <= 0 ? '0' : `${(vida / vidaMaxima) * 100}%`;
+     const larguraVidaEsq = monstroHp <= 0 ? '0' : `${(monstroHp / vidaMonstroInicial) * 100}%`;
+
+    return (
+      <div ref={containerRef} className="container">
+        <div className="rectangle">
+          <div className="conjunto">
+          <div id="Hp">
+           <span id="HpSpan" className="swing">❤️</span><div className="life-bar">
+         <div className="inner-bar" style={{ width: larguraVida }}></div>
+       </div>
+       <p className='valorVida'>{vida}/{vidaMaxima}</p>
+       </div>
+          <img
+            src={guerreirinho}
+            alt="Imagem Esquerda"
+            className="image image-left"
+            ref={imageRef}
+          />
+          </div>
+          <div className="conjunto">
+          <div id="EsqHp">
+       <span id="HpEsqSpan" className="swing">💀</span><div className="life-bar">
+         <div className="inner-bar" style={{ width: larguraVidaEsq }}></div>
+       </div>
+       <p className='valorVida'>{monstroHp}/{vidaMonstroInicial}</p>
+       </div>
+          <img
+            src={esqueleto}
+            alt="Imagem Direita"
+            className="image image-right"
+          />
+          </div>
+        </div>
+        <section id="barraDeJogo">
+          <img className="botao" src={ButtomDefender}/>
+          <div id='mini-container'>
+               <div id="energia">
+               <ExibirEnergia energia={energia} EnergMaxima={EnergMaxima}/> 
+               </div>
+               <div id="Array">
+             {arrayItens.map((item, index) => (
+               <div
+                 key={index}
+                 className={`item ${currentIndex === index ? 'amarelo' : ''} ${
+                   currentIndex !== divPreta && index === divPreta ? 'preto' : ''
+                 }`}
+               ></div>
+             ))}
+           </div>
+           </div>
+           <img className="botao" src={ButtomBater}/>
+             </section>
+      </div>
+    );
+  };
+export default Jogo

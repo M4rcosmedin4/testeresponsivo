@@ -47,7 +47,7 @@ export default function ExibirEnergia({ energia, EnergMaxima }) {
   }, [energia, EnergMaxima]); // Recalcula sempre que energia ou EnergMaxima mudam
 
   // Calcula o tamanho proporcional das imagens
-  const slotWidthPercentage = 100 / Math.ceil(EnergMaxima / 10);
+  const slotWidthPercentage = 50 / Math.ceil(EnergMaxima / 10);
 
   // Renderiza os slots com imagens
   return (
@@ -65,7 +65,6 @@ export default function ExibirEnergia({ energia, EnergMaxima }) {
             key={index}
             style={{
               flex: `0 0 ${slotWidthPercentage}%`, // Define a largura proporcional
-              height: '50px', // Altura fixa
             }}
           >
             <img

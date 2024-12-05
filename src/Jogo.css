@@ -56,42 +56,105 @@ body {
   right: 10%; /* Posição fixa da imagem direita */
   bottom: 5%;
 }
-#barraDeJogo{
-  width: 60vw;
-  background-color: #4A4A4A;
+
+
+.raio{
+  height: 20vh;
+}
+
+#Array {
   display: flex;
-  justify-items: center;
-  justify-content: center;
   align-items: center;
-  border: solid 1vw #4A4A4A;
-  border-bottom-left-radius: 2vw;
-  border-bottom-right-radius: 2vw;
+  justify-content: center;
+  align-content: center;
+  
 }
-
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: yellow;
+.item {
+  width: 7vh;
+  height: 7vh;
+  margin: 0; /* Espaçamento entre as divs */
+  background-color: white;
   border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+}
+.item:nth-child(even) {
+  background-color: #f5f5f5;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
-button:hover {
-  background-color: orange;
+.item:nth-child(odd) {
+  background-color: #ffff; /* Cinza */
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
 }
+  /* Estilos para o primeiro item */
+  .item:first-child {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-left:3px solid black ;
+    
+  }
+  /* Estilos para o último item */
+  .item:last-child {
+    border-bottom-right-radius: 25px;
+    border-top-right-radius: 25px;
+    border-right: 3px solid black;
+  }
+.amarelo {
+  background-color: yellow !important;
+}
+.item.preto {
+  background-color: black !important;
+}
+#barraDeJogo{
+  display: flex;
+  background-color: #4A4A4A;
+  width: 60vw;
+  border: solid 1vw #4A4A4A;
+  border-bottom-left-radius: 1vw;
+  border-bottom-right-radius: 1vw;
+}
+.botao{
+  height: 15vh;
+}
+
+@keyframes swing {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.swing {
+  display: inline-block;
+  animation: swing 0.3s ease;
+  animation-iteration-count: 1;
+}
+
+.life-bar {
+  display: flex;
+  width: 17vw;
+  font-size: 40px;
+  position: relative;
+  bottom: 19vh;
+  
+  
+}
+
 
 /* Se a altura for maior que a largura */
 @media (orientation: portrait) {
   .rectangle {
     margin-top: 1vh;
-    width: 100vw; /* Proporções ajustadas para retrato */
-    height: 40vh;
+    width: 70vh; /* Proporções ajustadas para retrato */
+    height: 55vw;
   }
   .image {
     width: 23vh; /* Ajusta para modo retrato */
+    position: absolute;
+    transition: left 1s ease-in-out; /* Suaviza o movimento */
+    height: auto; /* Mantém a proporção da imagem */
   }
   .image-left {
     left: 0; /* Posição inicial da imagem esquerda */
@@ -102,7 +165,31 @@ button:hover {
   .image-right {
     right: 0; /* Posição fixa da imagem direita */
   }
-  #linhaDeEnergia{
+  .item {
+    width: 7vw;
+    height: 7vw;
+    margin: 0; /* Espaçamento entre as divs */
+    background-color: white;
+    border: none;
+  }
+  #barraDeJogo{
     background-color: #4A4A4A;
+    width: 70vh;
+    border: solid 1vh #4A4A4A;
+    border-bottom-left-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    display: flex;
+  }
+  .botao{
+    height: 15vw;
+  }
+  .life-bar {
+    display: flex;
+    width: 17vh;
+    font-size: 40px;
+    position: relative;
+    bottom: 21vw;
+    
+    
   }
 }
